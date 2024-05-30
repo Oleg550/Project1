@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chipollino Pizzeria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="./index.html" class="logo">
+                        <img class="logo__img" src="img/logo.svg" alt="Logo">
+                    </a>
+                    <nav class="menu">
+                        <button class="menu__btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a href="./main_pizz.html" class="menu__list-link">НАША ПІЦА</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="./extra_food.html" class="menu__list-link  menu__list-link--active">ДОДАТКОВІ СТРАВИ</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="./drink.html" class="menu__list-link">НАПОЇ</a>
+                            </li>
+                            <li class="menu__list-item">
+                                <button class="open-cart-btn menu__list-link" onclick="openCart()">КОШИК</button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <main class="main">
+            <section class="choose">
+                <div class="container">
+                    <div id="sidebar">
+                        <div id="price-filter">
+                            <input type="range" id="price-slider" min="0" max="1500" value="0">
+                            <div id="price-display">0 грн - 1500 грн</div>
+                        </div>
+                    </div>
+                    <h2 class="section-title">
+                        Обирай свою улюблену страву
+                    </h2>
+                    <div class="tabs">
+                        <div class="tabs__btn">
+                            <button class="tabs__btn-item tabs__btn-item--active" data-button="content-1">Суші</button>
+                            <button class="tabs__btn-item" data-button="content-2">Салати</button>
+                            <button class="tabs__btn-item" data-button="content-3">Бургери</button>
+                            <button class="tabs__btn-item" data-button="content-4">Десерти</button>
+                        </div>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeCart()">&times;</span>
+                                <h2>Кошик</h2>
+                                <ul id="cart-items">
+                                </ul>
+                                <p id="total-price">Загальна ціна: 0 грн</p>
+                                <form id="checkout-form">
+                                    <label for="name">Ім'я*:</label>
+                                    <input type="text" id="name" name="name" required>
+                    
+                                    <label for="surname">Прізвище*:</label>
+                                    <input type="text" id="surname" name="surname" required>
+    
+                                    <label for="street">Вулиця*:</label>
+                                    <input type="text" id="street" name="street" required>
+                                    <label for="street">Номер будинку*:</label>
+                                    <input type="text" id="full-address" placeholder="Номер будинку, Номер квартири">
+    
+                                    <label for="comment">Коментарі</label>
+                                    <input type="text" id="comment" name="comment" required>
+    
+    
+                                    <input type="checkbox" id="pay-on-delivery" name="payOnDelivery">
+                                    <label for="pay-on-delivery">Оплатити при отриманні</label><br>
+
+                                    <input type="checkbox" id="pay-on-delivery" name="payOnDelivery">
+                                    <label for="pay-on-delivery">Доставка кур'єром не потрібна</label>
+                    
+                    
+                                    <input type="submit" onclick="window.location.href = 'pay.html';" value="Сплатити">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tabs__content">
+                            <div class="tabs__content-item tabs__content-item--active" id="content-1">
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras1.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Філадельфія максі</h4>
+                                        <p class="card__text">1/2 рола філадельфія з вугрем, 1/2 рола фаладельфія з лососем, 1/2 рола філадельфія з креветкою 440г</p>
+                                        <p class="card__price"> 410.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Філадельфія максі', 410, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras2.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Філадельфія з креветкою</h4>
+                                        <p class="card__text">Рис нішикі, норі, сир Філадельфія, огірок свіжий, креветка, авокадо 300г</p>
+                                        <p class="card__price">305.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Філадельфія з креветкою', 305, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras3.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Філадельфія з вугрем</h4>
+                                        <p class="card__text">Рис нішикі, норі, вугор, авокадо, огірок, сир Філадельфія, кунжут, соус Унагі 290г</p>
+                                        <p class="card__price">335.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Філадельфія з вугрем', 355, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras4.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Філадельфія з лососем</h4>
+                                        <p class="card__text">Рис нішикі, норі, лосось, авокадо, огірок, сир Філадельфія, ікра чорна 290г</p>
+                                        <p class="card__price">305.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Філадельфія з лососем', 305, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras5.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Теплий рол</h4>
+                                        <p class="card__text">Рис нішикі, норі, креветка темпура, лосось, вугор, авокадо, ікра тобіко зелена, соус Шаке 330 г</p>
+                                        <p class="card__price">415.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Теплий рол', 415, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras6.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Рол сирний</h4>
+                                        <p class="card__text">Рис нішикі, норі, сир горгонзола, сир Філадельфія, сир тостовий, сир пармезан, соус вершковий васабі 280 г</p>
+                                        <p class="card__price">225.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Рол сирний', 225, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras7.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Рол цезар</h4>
+                                        <p class="card__text">Рис нішикі, норі, сир Філадельфія, помідор, айсберг, куряче філе смажене, бекон, соус цезар, пармезан 300г</p>
+                                        <p class="card__price">225.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Рол цезар', 225, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras8.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Рол запечений</h4>
+                                        <p class="card__text">Рис нішикі, норі, креветка темпура, лосось, сир філадельфія, соус унагі, кунжут 275 г</p>
+                                        <p class="card__price">325.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Рол запечений', 325, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras9.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Сет "Велика риба"</h4>
+                                        <p class="card__text">Каліфорнія з лососем, каліфорнія з вугрем, каліфорнія з тунцем, каліфорнія, макі з лососем, макі з вугрем, макі з тунцем, макі з креветкою темпура 1500г</p>
+                                        <p class="card__price">1,445.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Сет: Велика риба',1445, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras10.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Сет "Тріо філадельфій"</h4>
+                                        <p class="card__text">Рол філадельфія з лососем, рол філадельфія з вугрем, рол філадельфія з креветкою 880г</p>
+                                        <p class="card__price">870.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Сет: Трій філадельфій', 870, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras11.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Сет "Від філадельфії до каліфорнії"</h4>
+                                        <p class="card__text">Рол філадельфія з лососем,Рол філадельфія з вугрем,Рол каліфорнія з лососем,Рол каліфорнія з крабом та креветкою темпура 1105 г</p>
+                                        <p class="card__price">1,170.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Сет: Від філадельфії до каліфорнії', 1170, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extras12.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Сет "I love лосося"</h4>
+                                        <p class="card__text">Рол філадельфія з лососем, рол каліфорнія з лососем, рол з креветкою темпура та тартаром з лосося, макі рол з лососем 1055 г</p>
+                                        <p class="card__price">1,070.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Сет: I love лосося', 1070, event)">Додати в кошик</a>
+                                </div>
+                            </div>
+                            <div class="tabs__content-item" id="content-2">
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrasal1.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">З прошуто, грушею та горгонзолою</h4>
+                                        <p class="card__text">Мікс салату, горгонзола, свіжа груша, горішки кеш’ю, прошуто, червона цибуля, заправка на оливковій олії з травами 190г</p>
+                                        <p class="card__price">235.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Салат: З прошуто, грушею та горгонзолою', 235, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrasal2.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">З телятиною під соусом бальзамік</h4>
+                                        <p class="card__text">Телятина, пармезан, салат-мікс, помідори чері, артишоки в маринаді, заправка на оливковій олії 190г</p>
+                                        <p class="card__price">285.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Салат: З телятиною під соусом бальзамік', 285, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrasal3.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Цезар з лососем гриль</h4>
+                                        <p class="card__text">Листя свіжого салату, томати чері, хрусткий бекон, пармезан, соус цезар, авокадо, лосось гриль 300г.</p>
+                                        <p class="card__price">310.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Салат: Цезар з лососем гриль', 310, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrasal4.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Салат з грушею та креветками</h4>
+                                        <p class="card__text">Смажені креветки з часником та лимоном, авокадо в паніровці з сухарів Панко, свіжі шматочки груші та рукола 285г.</p>
+                                        <p class="card__price">310.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Салат: З грушею та креветками', 310, event)">Додати в кошик</a>
+                                </div>
+                            </div>
+                            <div class="tabs__content-item" id="content-3">
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrabur1.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Бургер з свининою та соусом кімчі</h4>
+                                        <p class="card__text">Подається з бататом фрі, квашеними огірками та соусом Цезаре 430г</p>
+                                        <p class="card__price">315.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Бургер з свининою та соусом кімчі', 315, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrabur2.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Бургер з рваною куркою та шпинатом</h4>
+                                        <p class="card__text">Подається з картопляними діпами, маринованою цибулею та квашеним огірком 430г</p>
+                                        <p class="card__price">285.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Бургер з рваною куркою та шпинатом', 285, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrabur3.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Бургер з яловичиною пепероні</h4>
+                                        <p class="card__text">Подається з картопляними діпами, маринованою цибулею та соусом Цезаре 520г</p>
+                                        <p class="card__price">305.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Бургер з яловичиною пепероні', 305, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrabur4.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Бургер з карамель цибулею</h4>
+                                        <p class="card__text">Подається з картопляними діпами, маринованою цибулею соусом Цезаре 520г</p>
+                                        <p class="card__price">300.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Бургер з карамель цибулею', 300, event)">Додати в кошик</a>
+                                </div>
+                            </div>
+                            <div class="tabs__content-item" id="content-4">
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrades1.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Зелений Баскський чізкейк з малиновим соусом</h4>
+                                        <p class="card__text">150/40г</p>
+                                        <p class="card__price">170.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Зелений Баскський чізкейк з малиновим соусом', 170, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrades2.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Тірамісу</h4>
+                                        <p class="card__text">150 г</p>
+                                        <p class="card__price">170.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Тірамісу', 170, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrades3.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Сирники</h4>
+                                        <p class="card__text">Ягідний соус та сметана 330г</p>
+                                        <p class="card__price">170.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Сирники', 170, event)">Додати в кошик</a>
+                                </div>
+                                <div class="card">
+                                    <img class="card__img" src="./img/extrades1.jpg" alt="card-1">
+                                    <div class="card__content">
+                                        <h4 class="card__title">Зелений Баскський чізкейк з малиновим соусом</h4>
+                                        <p class="card__text">150/40г</p>
+                                        <p class="card__price">170.00 грн</p>
+                                    </div>
+                                    <a href="./pizz1.html" class="card_link">Детальніше</a>
+                                    <a href="#" class="card__link"  onclick="addToCart('Зелений Баскський чізкейк з малиновим соусом', 170, event)">Додати в кошик</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <nav class="footer__menu">
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">Products</p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="./new-cars.html">New</a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="./sold-car.html">Sell your car</a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">Resources</p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="./pre-owned.html">Pre-owned car</a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="./contacts.html">FAQ</a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">Work With TrueCar</p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="https://www.aldcarmarket.com/">Dealers</a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="https://www.aldcarmarket.com/">Partners</a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">About</p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="./index.html">About us</a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a class="footer__menu-link" href="./contacts.html">Contact us</a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="app">
+                    <li class="app__item">
+                        <a class="app__item-link" href="#">
+                            <img class="app__item-img" src="img/appstore.svg" alt="appstore">
+                        </a>
+                    </li>
+                    <li class="app__item">
+                        <a class="app__item-link" href="#">
+                            <img class="app__item-img" src="img/googleplay.svg" alt="googleplay">
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copy">
+                    <p class="footer__copy-text">
+                        For questions about the TrueCar Auto Buying Service please call 1-888-878-3227.
+                        Certified Dealers are contractually obligated by TrueCar to meet certain customer
+                        service requirements and complete the 
+                        TrueCar Dealer Certification Program.
+                    </p>
+                    <p class="footer__copy-text">
+                        TrueCar does not broker, sell, or lease motor vehicles. Unless otherwise noted, all
+                        vehicles shown on this website are offered for sale by licensed motor vehicle dealers. 
+                        All vehicles are subject to prior sale. By accessing this website, you agree to the 
+                        TrueCar Terms of Service and Privacy Policy.
+                    </p>
+                </div>
+                <nav class="copy__nav">
+                    <ul class="copy__nav-list">
+                        <li class="copy__nav-item">
+                            <a class="copy__nav-link" href="#">Terms of Service</a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a class="copy__nav-link" href="#">Privacy Policy</a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a class="copy__nav-link" href="#">Do Not Sell My Personal Information</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
